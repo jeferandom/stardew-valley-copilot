@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Image, StyleSheet, Platform } from "react-native";
 
 import { HelloWave } from "@/components/HelloWave";
@@ -5,8 +6,10 @@ import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import ThemedButton from "@/components/ThemedButton";
-
+import { Picker } from "@react-native-picker/picker";
+import { crops } from "@/data/Crops";
 export default function HomeScreen() {
+  const [selectedCrop, setselectedCrop] = useState();
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
@@ -17,23 +20,31 @@ export default function HomeScreen() {
         />
       }
     >
+      <Picker
+        selectedValue={selectedCrop}
+        onValueChange={(itemValue, itemIndex) => setselectedCrop(itemValue)}
+      >
+        {Object.keys(crops).map((key) => {
+          return <Picker.Item label={key} value={key} />;
+        })}
+      </Picker>
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Stardew Valley Copilot!</ThemedText>
         <HelloWave />
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Planta: Coliflor</ThemedText>
+        <ThemedText type="subtitle">Crop: Coliflor</ThemedText>
+        <ThemedText>Total profit: +353.000</ThemedText>
+        <ThemedText>Total profit: +353.000</ThemedText>
+        <ThemedText>Profit per day: +15.87</ThemedText>
+        <ThemedText>Profit per day: +15.87</ThemedText>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Total profit: +353.000</ThemedText>
+        <ThemedText type="subtitle">Crop Info</ThemedText>
+        <ThemedText>Value(Normal): 175</ThemedText>
+        <ThemedText>Value(Silver): 218</ThemedText>
       </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Total profit: +353.000</ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Profit per day: +15.87</ThemedText>
-      </ThemedView>
-      <ThemedButton text="Calcular"/>
+      <ThemedButton text="Calcular" />
     </ParallaxScrollView>
   );
 }
