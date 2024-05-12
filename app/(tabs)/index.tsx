@@ -4,6 +4,7 @@ import { HelloWave } from "@/components/HelloWave";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
+import ThemedButton from "@/components/ThemedButton";
 
 export default function HomeScreen() {
   return (
@@ -23,6 +24,16 @@ export default function HomeScreen() {
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Planta: Coliflor</ThemedText>
       </ThemedView>
+      <ThemedView style={styles.stepContainer}>
+        <ThemedText type="subtitle">Total profit: +353.000</ThemedText>
+      </ThemedView>
+      <ThemedView style={styles.stepContainer}>
+        <ThemedText type="subtitle">Total profit: +353.000</ThemedText>
+      </ThemedView>
+      <ThemedView style={styles.stepContainer}>
+        <ThemedText type="subtitle">Profit per day: +15.87</ThemedText>
+      </ThemedView>
+      <ThemedButton text="Calcular"/>
     </ParallaxScrollView>
   );
 }
@@ -38,7 +49,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   reactLogo: {
-    height: 178,
+    height: 100,
     width: 290,
     bottom: 0,
     left: 0,
