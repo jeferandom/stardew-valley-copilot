@@ -9,8 +9,8 @@ import ThemedButton from "@/components/ThemedButton";
 import { Picker } from "@react-native-picker/picker";
 import { Crop, crops } from "@/data/Crops";
 export default function HomeScreen() {
-  const [selectedCrop, setselectedCrop] = useState<Crop>(crops.carrot);
-  console.log("selectedCrop", selectedCrop);
+  const [selectedCropKey, setselectedCropKey] = useState("carrot");
+  console.log("selectedCropKey", selectedCropKey);
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
@@ -22,16 +22,14 @@ export default function HomeScreen() {
       }
     >
       <Picker
-        selectedValue={selectedCrop.name}
+        selectedValue={selectedCropKey}
         onValueChange={(cropKey, itemIndex) => {
-          console.log("setchange", crops.carrot, cropKey);
-          setselectedCrop(crops[cropKey]);
+          console.log("setchange", cropKey);
+          setselectedCropKey(cropKey);
         }}
       >
         {Object.keys(crops).map((cropKey, i) => {
-          return (
-            <Picker.Item label={crops[cropKey].name} value={cropKey} key={i} />
-          );
+          return <Picker.Item label={cropKey} value={cropKey} key={i} />;
         })}
       </Picker>
       <ThemedView style={styles.titleContainer}>
@@ -39,14 +37,22 @@ export default function HomeScreen() {
         <Carrot />
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">{selectedCrop.name}</ThemedText>
-        <ThemedText>Total Profit: {selectedCrop.produce.price} </ThemedText>
+        <ThemedText type="subtitle">{crops[selectedCropKey].name}</ThemedText>
+        <ThemedText>
+          Total Profit: {crops[selectedCropKey].produce.price}{" "}
+        </ThemedText>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">Crop Info </ThemedText>
-        <ThemedText>Value (Normal): {selectedCrop.produce.price} </ThemedText>
-        <ThemedText>Seeds (Pierre): {selectedCrop.seeds.pierre}</ThemedText>
-        <ThemedText>Seeds (Joja): {selectedCrop.seeds.joja}</ThemedText>
+        <ThemedText>
+          Value (Normal): {crops[selectedCropKey].produce.price}{" "}
+        </ThemedText>
+        <ThemedText>
+          Seeds (Pierre): {crops[selectedCropKey].seeds.pierre}
+        </ThemedText>
+        <ThemedText>
+          Seeds (Joja): {crops[selectedCropKey].seeds.joja}
+        </ThemedText>
       </ThemedView>
       <ThemedButton text="Calcular" />
     </ParallaxScrollView>
