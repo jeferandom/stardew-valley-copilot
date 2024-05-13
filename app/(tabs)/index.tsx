@@ -39,16 +39,14 @@ export default function HomeScreen() {
         <Carrot />
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Crop: Coliflor</ThemedText>
-        <ThemedText>Total profit: +353.000</ThemedText>
-        <ThemedText>Total profit: +353.000</ThemedText>
-        <ThemedText>Profit per day: +15.87</ThemedText>
-        <ThemedText>Profit per day: +15.87</ThemedText>
+        <ThemedText type="subtitle">{selectedCrop.name}</ThemedText>
+        <ThemedText>Total Profit: {selectedCrop.produce.price} </ThemedText>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Crop Info</ThemedText>
-        <ThemedText>Value(Normal): {selectedCrop?.name}</ThemedText>
-        <ThemedText>Value(Silver): 218</ThemedText>
+        <ThemedText type="subtitle">Crop Info </ThemedText>
+        <ThemedText>Value (Normal): {selectedCrop.produce.price} </ThemedText>
+        <ThemedText>Seeds (Pierre): {selectedCrop.seeds.pierre}</ThemedText>
+        <ThemedText>Seeds (Joja): {selectedCrop.seeds.joja}</ThemedText>
       </ThemedView>
       <ThemedButton text="Calcular" />
     </ParallaxScrollView>
