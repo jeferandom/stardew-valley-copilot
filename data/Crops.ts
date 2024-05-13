@@ -3,7 +3,7 @@
  */
 
 // Crop List
-export const crops = {
+export const crops: Record<string, Crop> = {
   carrot: {
     name: "Carrot",
     url: "https://stardewvalleywiki.com/Carrot",
@@ -1176,3 +1176,33 @@ export const crops = {
     isWildseed: true,
   },
 };
+export interface Crop {
+  name: string;
+  url: string;
+  img: string;
+  seeds: Seed;
+  growth: Growth;
+  produce: Produce;
+}
+
+export interface Seed {
+  sell: number;
+  pierre: number;
+  joja: number;
+  special: number;
+  specialLoc: string;
+  specialUrl: string;
+}
+
+export interface Growth {
+  initial: number;
+  regrow: number;
+}
+
+export interface Produce {
+  extra: number;
+  extraPerc: number;
+  price: number;
+  jarType: string;
+  kegType: string;
+}
