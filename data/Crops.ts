@@ -1183,6 +1183,12 @@ export interface Crop {
   seeds: Seed;
   growth: Growth;
   produce: Produce;
+  isWildseed?: boolean;
+  id?: number;
+  planted?: string;
+  harvests?: number;
+  seedLoss?: number;
+  fertLoss?: number;
 }
 
 export interface Seed {

@@ -1,4 +1,4 @@
-import { crops } from "../data/Crops";
+import { crops } from "./Crops";
 
 // Different seasons with predefined crops.
 export const Seasons = [
