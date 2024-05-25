@@ -60,13 +60,32 @@ const levelRatio = (fertilizer: number, level: number, isWildseed: boolean) => {
 };
 
 
+/*
+ * Calculates the minimum cost of a single packet of seeds.
+ * @param crop The crop object, containing all the crop data.
+ * @return The minimum cost of a packet of seeds, taking options into account.
+ */
+function minSeedCost(crop: Crop) {
+  var minSeedCost = Infinity;
+
+  if (crop.seeds.pierre != 0 && options.seeds.pierre && crop.seeds.pierre < minSeedCost)
+    minSeedCost = crop.seeds.pierre;
+  if (crop.seeds.joja != 0 && options.seeds.joja && crop.seeds.joja < minSeedCost)
+    minSeedCost = crop.seeds.joja;
+  if (crop.seeds.special != 0 && options.seeds.special && crop.seeds.special < minSeedCost)
+    minSeedCost = crop.seeds.special;
+  if (minSeedCost == Infinity)
+    minSeedCost = 0;
+
+  return minSeedCost;
+}
 
 /*
  * Calculates the number of crops planted.
  * @param crop The crop object, containing all the crop data.
  * @return The number of crops planted, taking the desired number planted and the max seed money into account.
  */
-const planted = (crop) => {
+const planted = (crop: Crop) => {
   if (options.buySeed && options.maxSeedMoney !== 0) {
     return Math.min(
       options.planted,
@@ -85,7 +104,8 @@ export default function HomeScreen() {
   const [isCrossSeason, setIsCrossSeason] = useState(false);
   const [profit, setProfit] = useState(0);
   const [profitData, setProfitData] = useState({});
-
+  const [settings, setSettings] = useState(options);
+  const [useLevel, setUseLevel] = useState<number | undefined>(0);
   /*
  * Calculates the profit for a specified crop.
  * @param crop The crop object, containing all the crop data.
@@ -93,16 +113,14 @@ export default function HomeScreen() {
  */
   const calculateProfit = (crop: Crop) => {
     console.log(crop)
-    var num_planted = planted(crop);
+    const num_planted = planted(crop);
     //var total_harvests = crop.harvests * num_planted;
-    var fertilizer = fertilizers[options.fertilizer];
-    var produce = options.produce;
-    var isTea = crop.name === "Tea Leaves";
-    var isCoffee = crop.name == "Coffee Bean";
+    const fertilizer = fertilizers[settings.fertilizer];
+    const produce = settings.produce;
+    const isTea = crop.name === "Tea Leaves";
+    const isCoffee = crop.name == "Coffee Bean";
 
-    var useLevel = options.level;
-    if (crop.isWildseed) useLevel = options.foragingLevel;
-
+    if (crop.isWildseed) { setUseLevel(settings.foragingLevel) } else { setUseLevel(settings.level) }
     const { ratioN, ratioS, ratioG, ratioI } = levelRatio(
       fertilizer.ratio,
       useLevel + options.foodLevel,
