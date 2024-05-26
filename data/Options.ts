@@ -7,7 +7,7 @@ type Options = {
   maxSeedMoney: number;
   days: number;
   fertilizer: number;
-  level: number | undefined;
+  level: number;
   season: number;
   buySeed: boolean;
   replant: boolean;
@@ -31,7 +31,7 @@ type Options = {
   foodLevel: number;
   extra: boolean;
   disableLinks: boolean;
-  foragingLevel?: number | undefined;
+  foragingLevel: number;
 };
 
 // Options used to draw the graph.

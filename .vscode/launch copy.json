@@ -9,8 +9,7 @@
       "request": "launch",
       "name": "Launch Chrome against localhost 8081",
       "url": "http://localhost:8081",
-      "webRoot": "${workspaceFolder}",
-      "sourceMaps": true
+      "webRoot": "${workspaceFolder}"
     }
   ]
 }

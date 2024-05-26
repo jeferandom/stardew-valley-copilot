@@ -19,8 +19,14 @@ import { fertilizers, Fertilizer, Fertilizers } from "@/data/Fertilizers";
  * @param level The total farming skill level of the player
  * @return Object containing ratios of iridium, gold, silver, and unrated crops liklihood
  */
-const levelRatio = (fertilizer: number, level: number, isWildseed: boolean) => {
-  var ratio = {};
+const getLevelRatio = (fertilizer: number, level: number, isWildseed: boolean) => {
+  console.log("levelRatio", fertilizer, level, isWildseed);
+  let ratio = {
+    ratioN: 0,
+    ratioS: 0,
+    ratioG: 0,
+    ratioI: 0,
+  };
 
   if (isWildseed) {
     // All wild crops are iridium if botanist is selected
@@ -105,14 +111,20 @@ export default function HomeScreen() {
   const [profit, setProfit] = useState(0);
   const [profitData, setProfitData] = useState({});
   const [settings, setSettings] = useState(options);
-  const [useLevel, setUseLevel] = useState<number | undefined>(0);
+  const [useLevel, setUseLevel] = useState<number>(0);
+  const [levelRatio, setLevelRatio] = useState({
+    ratioN: 0,
+    ratioS: 0,
+    ratioG: 0,
+    ratioI: 0
+  });
   /*
  * Calculates the profit for a specified crop.
  * @param crop The crop object, containing all the crop data.
  * @return The total profit.
  */
   const calculateProfit = (crop: Crop) => {
-    console.log(crop)
+    console.log("crop", crop)
     const num_planted = planted(crop);
     //var total_harvests = crop.harvests * num_planted;
     const fertilizer = fertilizers[settings.fertilizer];
@@ -120,14 +132,27 @@ export default function HomeScreen() {
     const isTea = crop.name === "Tea Leaves";
     const isCoffee = crop.name == "Coffee Bean";
 
-    if (crop.isWildseed) { setUseLevel(settings.foragingLevel) } else { setUseLevel(settings.level) }
-    const { ratioN, ratioS, ratioG, ratioI } = levelRatio(
-      fertilizer.ratio,
-      useLevel + options.foodLevel,
+    if (crop.isWildseed) {
+      console.log("crop.isWildseed", "true")
+      setUseLevel(settings.foragingLevel)
+    } else {
+      console.log("crop.isWildseed", "false")
+      setUseLevel(settings.level)
+    }
+    const { ratioN, ratioS, ratioG, ratioI } = getLevelRatio(
+      fertilizers[settings.fertilizer].ratio,
+      useLevel + settings.foodLevel,
       crop.isWildseed
     );
-
-    if (isTea) (ratioN = 1), (ratioS = ratioG = ratioI = 0);
+    setLevelRatio({ ratioN, ratioS, ratioG, ratioI });
+    if (isTea) {
+      setLevelRatio({
+        ratioN: 1,
+        ratioS: 0,
+        ratioG: 0,
+        ratioI: 0
+      });
+    }
     var netIncome = 0;
     var netExpenses = 0;
     var totalProfit = 0;
@@ -280,38 +305,20 @@ export default function HomeScreen() {
       averageReturnOnInvestment = 0;
     }
 
-    profitData = {};
-    profitData.totalReturnOnInvestment = totalReturnOnInvestment;
-    profitData.averageReturnOnInvestment = averageReturnOnInvestment;
-    profitData.netExpenses = netExpenses;
-    profitData.profit = totalProfit;
-    profitData.ratioN = ratioN;
-    profitData.ratioS = ratioS;
-    profitData.ratioG = ratioG;
-    profitData.ratioI = ratioI;
+    const resultProfitData = {
+      netIncome: netIncome,
+      netExpenses: netExpenses,
+      profit: totalProfit,
+      totalReturnOnInvestment: totalReturnOnInvestment,
+      averageReturnOnInvestment: averageReturnOnInvestment,
+      ratioN: ratioN,
+      ratioS: ratioS,
+      ratioG: ratioG,
+      ratioI: ratioI,
+    };
 
     // console.log("Profit: " + profit);
-    return profitData;
-  };
-
-  /*
-   * Performs filtering on a season's crop list, saving the new list to the cropList array.
-   */
-  const filterCropsBySeason = () => {
-    cropList = [];
-
-    var season = seasons[options.season];
-
-    for (var i = 0; i < season.crops.length; i++) {
-      if (
-        (options.seeds.pierre && season.crops[i].seeds.pierre != 0) ||
-        (options.seeds.joja && season.crops[i].seeds.joja != 0) ||
-        (options.seeds.special && season.crops[i].seeds.specialLoc != "")
-      ) {
-        cropList.push(JSON.parse(JSON.stringify(season.crops[i])));
-        cropList[cropList.length - 1].id = i;
-      }
-    }
+    return resultProfitData;
   };
   useEffect(() => { }, []);
 
@@ -331,7 +338,7 @@ export default function HomeScreen() {
           console.log("setchange", cropKey);
           setSelectedCrop(cropKey);
           const profitData = calculateProfit(crops[cropKey]);
-          setProfit(crops[cropKey].produce.price * 2);
+          setProfit(profitData.profit);
           setProfitData(profitData);
         }}
       >

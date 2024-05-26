@@ -27,6 +27,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Pickles",
       kegType: "Juice",
     },
+    isWildseed: false,
   },
   summersquash: {
     name: "Summer Squash",
@@ -51,6 +52,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Pickles",
       kegType: "Juice",
     },
+    isWildseed: false,
   },
   broccoli: {
     name: "Broccoli",
@@ -75,6 +77,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Pickles",
       kegType: "Juice",
     },
+    isWildseed: false,
   },
   powdermelon: {
     name: "Powdermelon",
@@ -99,6 +102,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Jelly",
       kegType: "Wine",
     },
+    isWildseed: false,
   },
   amaranth: {
     name: "Amaranth",
@@ -123,6 +127,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Pickles",
       kegType: "Juice",
     },
+    isWildseed: false,
   },
   grape: {
     name: "Grape",
@@ -147,6 +152,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Jelly",
       kegType: "Wine",
     },
+    isWildseed: false,
   },
   hops: {
     name: "Hops",
@@ -172,6 +178,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Pickles",
       kegType: "Pale Ale",
     },
+    isWildseed: false,
   },
   pineapple: {
     name: "Pineapple",
@@ -196,6 +203,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Jelly",
       kegType: "Wine",
     },
+    isWildseed: false,
   },
   sweetgemberry: {
     name: "Sweet Gem Berry",
@@ -217,7 +225,10 @@ export const crops: Record<string, Crop> = {
       extra: 0,
       extraPerc: 0,
       price: 3000,
+      jarType: "Pickles",
+      kegType: "Tea",
     },
+    isWildseed: false,
   },
   tealeaves: {
     name: "Tea Leaves",
@@ -243,6 +254,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Pickles",
       kegType: "Tea",
     },
+    isWildseed: false,
   },
   fairyrose: {
     name: "Fairy Rose",
@@ -264,7 +276,10 @@ export const crops: Record<string, Crop> = {
       extra: 0,
       extraPerc: 0,
       price: 290,
+      kegType: "",
+      jarType: "",
     },
+    isWildseed: false,
   },
   tulip: {
     name: "Tulip",
@@ -286,7 +301,10 @@ export const crops: Record<string, Crop> = {
       extra: 0,
       extraPerc: 0,
       price: 30,
+      kegType: "",
+      jarType: "",
     },
+    isWildseed: false,
   },
   bluejazz: {
     name: "Blue Jazz",
@@ -308,7 +326,10 @@ export const crops: Record<string, Crop> = {
       extra: 0,
       extraPerc: 0,
       price: 50,
+      kegType: "",
+      jarType: "",
     },
+    isWildseed: false,
   },
   sunflower: {
     name: "Sunflower",
@@ -330,7 +351,10 @@ export const crops: Record<string, Crop> = {
       extra: 0,
       extraPerc: 0,
       price: 80,
+      kegType: "",
+      jarType: "",
     },
+    isWildseed: false,
   },
   coffeebean: {
     name: "Coffee Bean",
@@ -354,7 +378,9 @@ export const crops: Record<string, Crop> = {
       price: 15,
       keg: 150 / 5,
       kegType: "Coffee",
+      jarType: "",
     },
+    isWildseed: false,
   },
   poppy: {
     name: "Poppy",
@@ -376,7 +402,10 @@ export const crops: Record<string, Crop> = {
       extra: 0,
       extraPerc: 0,
       price: 140,
+      jarType: "",
+      kegType: "",
     },
+    isWildseed: false,
   },
   summerspangle: {
     name: "Summer Spangle",
@@ -398,7 +427,10 @@ export const crops: Record<string, Crop> = {
       extra: 0,
       extraPerc: 0,
       price: 90,
+      jarType: "",
+      kegType: "",
     },
+    isWildseed: false,
   },
   parsnip: {
     name: "Parsnip",
@@ -423,6 +455,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Pickles",
       kegType: "Juice",
     },
+    isWildseed: false,
   },
   greenbean: {
     name: "Green Bean",
@@ -447,6 +480,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Pickles",
       kegType: "Juice",
     },
+    isWildseed: false,
   },
   cauliflower: {
     name: "Cauliflower",
@@ -471,6 +505,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Pickles",
       kegType: "Juice",
     },
+    isWildseed: false,
   },
   potato: {
     name: "Potato",
@@ -495,6 +530,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Pickles",
       kegType: "Juice",
     },
+    isWildseed: false,
   },
   garlic: {
     name: "Garlic",
@@ -519,6 +555,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Pickles",
       kegType: "Juice",
     },
+    isWildseed: false,
   },
   taroroot: {
     name: "Taro Root",
@@ -543,6 +580,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Pickles",
       kegType: "Juice",
     },
+    isWildseed: false,
   },
   kale: {
     name: "Kale",
@@ -567,6 +605,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Pickles",
       kegType: "Juice",
     },
+    isWildseed: false,
   },
   unmilledrice: {
     name: "Unmilled Rice",
@@ -591,6 +630,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Pickles",
       kegType: "Juice",
     },
+    isWildseed: false,
   },
   rhubarb: {
     name: "Rhubarb",
@@ -615,6 +655,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Jelly",
       kegType: "Wine",
     },
+    isWildseed: false,
   },
   melon: {
     name: "Melon",
@@ -639,6 +680,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Jelly",
       kegType: "Wine",
     },
+    isWildseed: false,
   },
   tomato: {
     name: "Tomato",
@@ -663,6 +705,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Pickles",
       kegType: "Juice",
     },
+    isWildseed: false,
   },
   blueberry: {
     name: "Blueberry",
@@ -687,6 +730,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Jelly",
       kegType: "Wine",
     },
+    isWildseed: false,
   },
   hotpepper: {
     name: "Hot Pepper",
@@ -711,6 +755,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Jelly",
       kegType: "Wine",
     },
+    isWildseed: false,
   },
   wheat: {
     name: "Wheat",
@@ -736,6 +781,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Pickles",
       kegType: "Beer",
     },
+    isWildseed: false,
   },
   radish: {
     name: "Radish",
@@ -760,6 +806,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Pickles",
       kegType: "Juice",
     },
+    isWildseed: false,
   },
   redcabbage: {
     name: "Red Cabbage",
@@ -784,6 +831,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Pickles",
       kegType: "Juice",
     },
+    isWildseed: false,
   },
   starfruit: {
     name: "Starfruit",
@@ -808,6 +856,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Jelly",
       kegType: "Wine",
     },
+    isWildseed: false,
   },
   corn: {
     name: "Corn",
@@ -832,6 +881,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Pickles",
       kegType: "Juice",
     },
+    isWildseed: false,
   },
   eggplant: {
     name: "Eggplant",
@@ -856,6 +906,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Pickles",
       kegType: "Juice",
     },
+    isWildseed: false,
   },
   artichoke: {
     name: "Artichoke",
@@ -880,6 +931,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Pickles",
       kegType: "Juice",
     },
+    isWildseed: false,
   },
   pumpkin: {
     name: "Pumpkin",
@@ -904,6 +956,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Pickles",
       kegType: "Juice",
     },
+    isWildseed: false,
   },
   bokchoy: {
     name: "Bok Choy",
@@ -928,6 +981,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Pickles",
       kegType: "Juice",
     },
+    isWildseed: false,
   },
   yam: {
     name: "Yam",
@@ -952,6 +1006,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Pickles",
       kegType: "Juice",
     },
+    isWildseed: false,
   },
   cranberries: {
     name: "Cranberries",
@@ -976,6 +1031,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Jelly",
       kegType: "Wine",
     },
+    isWildseed: false,
   },
   beet: {
     name: "Beet",
@@ -1000,6 +1056,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Pickles",
       kegType: "Juice",
     },
+    isWildseed: false,
   },
   ancientfruit: {
     name: "Ancient Fruit",
@@ -1024,6 +1081,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Jelly",
       kegType: "Wine",
     },
+    isWildseed: false,
   },
   cactusfruit: {
     name: "Cactus Fruit",
@@ -1048,6 +1106,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Jelly",
       kegType: "Wine",
     },
+    isWildseed: false,
   },
   strawberry: {
     name: "Strawberry",
@@ -1072,6 +1131,7 @@ export const crops: Record<string, Crop> = {
       jarType: "Jelly",
       kegType: "Wine",
     },
+    isWildseed: false,
   },
   springseeds: {
     name: "Spring Seeds",
@@ -1094,6 +1154,8 @@ export const crops: Record<string, Crop> = {
       extraPerc: 0,
       // (Wild Horseradish + Daffodil + Leek + Dandelion) / 4
       price: (50 + 30 + 60 + 40) / 4,
+      jarType: "",
+      kegType: "",
     },
     isWildseed: true,
   },
@@ -1183,12 +1245,7 @@ export interface Crop {
   seeds: Seed;
   growth: Growth;
   produce: Produce;
-  isWildseed?: boolean;
-  id?: number;
-  planted?: string;
-  harvests?: number;
-  seedLoss?: number;
-  fertLoss?: number;
+  isWildseed: boolean;
 }
 
 export interface Seed {
@@ -1211,4 +1268,5 @@ export interface Produce {
   price: number;
   jarType: string;
   kegType: string;
+  keg?: number;
 }
