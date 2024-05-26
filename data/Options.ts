@@ -68,5 +68,6 @@ const options: Options = {
   foodLevel: 0,
   extra: false,
   disableLinks: false,
+  foragingLevel:0,
 };
 export default options;
