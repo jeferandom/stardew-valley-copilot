@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import { Image, StyleSheet, Platform } from "react-native";
-
+import { Select, SelectProvider } from '@mobile-reality/react-native-select-pro';
 import { Carrot } from "@/components/Carrot";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import ThemedButton from "@/components/ThemedButton";
-import { Picker } from "@react-native-picker/picker";
 import { Crop, crops } from "@/data/Crops";
 import options from "@/data/Options";
 import { fertilizers, Fertilizer, Fertilizers } from "@/data/Fertilizers";
+
 
 /*
  * Calculates the ratios of different crop ratings based on fertilizer level and player farming level
@@ -101,7 +101,9 @@ const planted = (crop: Crop) => {
     return options.planted;
   }
 };
-export default function HomeScreen() {
+
+
+const HomeScreen = () => {
   const [selectedCrop, setSelectedCrop] = useState("carrot");
   const [selectedSeason, setSelectedSeason] = useState("spring");
   const [currentDay, setCurrentDay] = useState(1);
@@ -112,12 +114,19 @@ export default function HomeScreen() {
   const [profitData, setProfitData] = useState({});
   const [settings, setSettings] = useState(options);
   const [useLevel, setUseLevel] = useState<number>(0);
+  const [renderKey, setRenderKey] = useState(0);
+
   const [levelRatio, setLevelRatio] = useState({
     ratioN: 0,
     ratioS: 0,
     ratioG: 0,
     ratioI: 0
   });
+  const [cropsList, setCropsList] = useState([{
+    label:
+      "Carrot",
+    value: "carrot",
+  }]);
   /*
  * Calculates the profit for a specified crop.
  * @param crop The crop object, containing all the crop data.
@@ -320,8 +329,18 @@ export default function HomeScreen() {
     // console.log("Profit: " + profit);
     return resultProfitData;
   };
-  useEffect(() => { }, []);
+  useEffect(() => {
+    const mapCropList = Object.keys(crops).map((cropKey, i) => {
+      return {
+        label: cropKey,
+        value: cropKey,
+      }
+    })
+    setCropsList(mapCropList);
+    setRenderKey(prevKey => prevKey + 1);
+  }, []);
 
+  console.log("cropsList", cropsList)
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
@@ -332,36 +351,11 @@ export default function HomeScreen() {
         />
       }
     >
-      <Picker
-        selectedValue={selectedCrop}
-        onValueChange={(cropKey, itemIndex) => {
-          console.log("setchange", cropKey);
-          setSelectedCrop(cropKey);
-          const profitData = calculateProfit(crops[cropKey]);
-          setProfit(profitData.profit);
-          setProfitData(profitData);
-        }}
-      >
-        {Object.keys(crops).map((cropKey, i) => {
-          return <Picker.Item label={cropKey} value={cropKey} key={i} />;
-        })}
-      </Picker>
-      <Picker
-        selectedValue={selectedSeason}
-        onValueChange={(seasonKey, itemIndex) => {
-          setSelectedSeason(seasonKey);
-        }}
-      >
-        <Picker.Item label={"Spring"} value={"spring"} />;
-        <Picker.Item label={"Summer"} value={"summer"} />;
-        <Picker.Item label={"Fall"} value={"fall"} />;
-        <Picker.Item label={"Winter"} value={"winter"} />;
-        <Picker.Item label={"Greenhouse"} value={"greenhouse"} />;
-      </Picker>
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Stardew Valley Copilot!</ThemedText>
         <Carrot />
       </ThemedView>
+      <Select key={renderKey} options={cropsList} theme={"dark"} styles={styles} />
       <ThemedView style={styles.stepContainer}>
         <ThemedText type="subtitle">{crops[selectedCrop].name}</ThemedText>
         <ThemedText>Total Profit: {profit} </ThemedText>
@@ -378,10 +372,38 @@ export default function HomeScreen() {
       </ThemedView>
       <ThemedButton text="Calcular" />
     </ParallaxScrollView>
+
   );
 }
 
+const App = () => {
+  return (
+    <SelectProvider>
+      <HomeScreen />
+    </SelectProvider>
+  );
+};
+export default App;
 const styles = StyleSheet.create({
+  optionsList: {
+    height: 300,//OPTIONS_LIST_HEIGHT modificar este valor en la libreria node_modules\@mobile-reality\react-native-select-pro\src\constants\styles.ts
+  },
+  select: {
+    container: {
+      height: 100,
+    },
+    text: {
+      fontSize: 32,
+    },
+  },
+  option: {
+    text: {
+      fontSize: 32,
+    },
+    container: {
+      height: 100,
+    }
+  },
   titleContainer: {
     flexDirection: "row",
     alignItems: "center",
