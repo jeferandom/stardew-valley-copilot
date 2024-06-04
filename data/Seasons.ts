@@ -1,7 +1,7 @@
 import { crops } from "./Crops";
 
 // Different seasons with predefined crops.
-export const Seasons = [
+export const seasons = [
   {
     name: "Spring",
     duration: 28,

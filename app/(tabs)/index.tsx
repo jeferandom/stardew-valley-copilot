@@ -7,8 +7,143 @@ import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import ThemedButton from "@/components/ThemedButton";
 import { Crop, crops } from "@/data/Crops";
+import { seasons } from "@/data/Seasons";
 import options from "@/data/Options";
 import { fertilizers, Fertilizer, Fertilizers } from "@/data/Fertilizers";
+
+const HomeScreen = () => {
+  const [selectedCrop, setSelectedCrop] = useState("carrot");
+  const [selectedSeason, setSelectedSeason] = useState("Spring");
+  const [currentDay, setCurrentDay] = useState(1);
+  const [numberDays, setNumberDays] = useState(28);
+  const [numberOfCrops, setNumberOfCrops] = useState(1);
+  const [isCrossSeason, setIsCrossSeason] = useState(false);
+  const [profit, setProfit] = useState(0);
+  const [profitData, setProfitData] = useState({});
+  const [settings, setSettings] = useState(options);
+  const [useLevel, setUseLevel] = useState<number>(0);
+  const [renderKey, setRenderKey] = useState(0);
+  const [defaultSeason, setDefaultSeason] = useState({
+    label: seasons[0].name,
+    value: seasons[0].name,
+  });
+
+
+  const [levelRatio, setLevelRatio] = useState({
+    ratioN: 0,
+    ratioS: 0,
+    ratioG: 0,
+    ratioI: 0
+  });
+  const [seasonsList, setSeasonsList] = useState([{
+    label:
+      "Spring",
+    value: "Spring",
+  }]);
+
+  const onSelectSeason = (option: { "label": string, "value": string }) => {
+    console.log("onSelectSeason", option);
+    setSelectedSeason(option.value);
+  }
+
+  useEffect(() => {
+    const list = Object.keys(seasons).map((itemKey, i) => {
+      let itemKeyNumber = parseInt(itemKey);
+      return {
+        label: seasons[itemKeyNumber].name,
+        value: seasons[itemKeyNumber].name,
+      }
+    })
+    setSeasonsList(list);
+    setRenderKey(prevKey => prevKey + 1);
+  }, []);
+
+  return (
+    <>
+      <ParallaxScrollView
+        headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
+        headerImage={
+          <Image
+            source={require("@/assets/images/background.jpg")}
+            style={styles.reactLogo}
+          />
+        }
+      >
+        <ThemedView style={styles.titleContainer}>
+          <ThemedText type="title">Stardew Valley Copilot!</ThemedText>
+          <Carrot />
+        </ThemedView>
+
+        <ThemedView>
+          <ThemedText type="title">Season:</ThemedText>
+          <Select key={renderKey} options={seasonsList} defaultOption={defaultSeason} theme={"dark"} styles={styles} onSelect={onSelectSeason} clearable={false} />
+        </ThemedView>
+
+        <ThemedText type="title">Cross-Season:</ThemedText>
+        <ThemedText type="title">Current Day:</ThemedText>
+        <ThemedText type="title">Number of Days:</ThemedText>
+        <ThemedText type="title">Number of Crops:</ThemedText>
+
+        <ThemedText type="title">Produce Type:</ThemedText>
+        <Select key={renderKey + 1} options={seasonsList} defaultOption={defaultSeason} theme={"dark"} styles={styles} onSelect={onSelectSeason} clearable={false} />
+        <ThemedText type="title">Equipment:	</ThemedText>
+        <ThemedText type="title">Non-existent: </ThemedText>
+        <ThemedText type="title">Aging: </ThemedText>
+        <ThemedText type="title">Profit Display:	 </ThemedText>
+        <Select key={renderKey + 2} options={seasonsList} defaultOption={defaultSeason} theme={"dark"} styles={styles} onSelect={onSelectSeason} clearable={false} />
+        <ThemedText type="title">Max Seed Money:		 </ThemedText>
+        <ThemedText type="title">Seed Sources:		 </ThemedText>
+        <ThemedText type="title">Pay For Seeds:	 </ThemedText>
+        <ThemedText type="title">Process & Replant:		 </ThemedText>
+        <ThemedText type="title">Use Next Year:		 </ThemedText>
+        <ThemedText type="title">Fertilizer:	 </ThemedText>
+        <Select key={renderKey + 3} options={seasonsList} defaultOption={defaultSeason} theme={"dark"} styles={styles} onSelect={onSelectSeason} clearable={false} />
+        <ThemedText type="title">Pay For Fertilizer:	 </ThemedText>
+        <ThemedText type="title">Speed-Gro Source: </ThemedText>
+        <Select key={renderKey + 4} options={seasonsList} defaultOption={defaultSeason} theme={"dark"} styles={styles} onSelect={onSelectSeason} clearable={false} />
+        <ThemedText type="title">Farming Level: </ThemedText>
+        <ThemedText type="title">Level 5 Skill: </ThemedText>
+        <ThemedText type="title">Level 10 Skill: </ThemedText>
+        <Select key={renderKey + 5} options={seasonsList} defaultOption={defaultSeason} theme={"dark"} styles={styles} onSelect={onSelectSeason} clearable={false} />
+        <ThemedText type="title">Foraging Level:</ThemedText>
+        <ThemedText type="title">Level 5 skill:</ThemedText>
+        <ThemedText type="title">Level 10 skill:</ThemedText>
+        <ThemedText type="title">Farming Food Buff:</ThemedText>
+        <Select key={renderKey + 6} options={seasonsList} defaultOption={defaultSeason} theme={"dark"} styles={styles} onSelect={onSelectSeason} clearable={false} />
+        <ThemedText type="title">Show Extra Info:</ThemedText>
+        <ThemedText type="title">Show Extra Info:</ThemedText>
+
+
+        {/* <ThemedView style={styles.stepContainer}>
+        <ThemedText type="subtitle">{crops[selectedCrop].name}</ThemedText>
+        <ThemedText>Total Profit: {profit} </ThemedText>
+      </ThemedView>
+      <ThemedView style={styles.stepContainer}>
+        <ThemedText type="subtitle">Crop Info </ThemedText>
+        <ThemedText>
+          Value (Normal): {crops[selectedCrop].produce.price}{" "}
+        </ThemedText>
+        <ThemedText>
+          Seeds (Pierre): {crops[selectedCrop].seeds.pierre}
+        </ThemedText>
+        <ThemedText>Seeds (Joja): {crops[selectedCrop].seeds.joja}</ThemedText>
+      </ThemedView> */}
+        {/* <ThemedButton text="Calcular" /> */}
+      </ParallaxScrollView>
+
+    </>
+
+  );
+}
+
+const App = () => {
+  return (
+    <SelectProvider>
+      <HomeScreen />
+    </SelectProvider>
+  );
+};
+export default App;
 
 
 /*
@@ -66,68 +201,7 @@ const getLevelRatio = (fertilizer: number, level: number, isWildseed: boolean) =
 };
 
 
-/*
- * Calculates the minimum cost of a single packet of seeds.
- * @param crop The crop object, containing all the crop data.
- * @return The minimum cost of a packet of seeds, taking options into account.
- */
-function minSeedCost(crop: Crop) {
-  var minSeedCost = Infinity;
-
-  if (crop.seeds.pierre != 0 && options.seeds.pierre && crop.seeds.pierre < minSeedCost)
-    minSeedCost = crop.seeds.pierre;
-  if (crop.seeds.joja != 0 && options.seeds.joja && crop.seeds.joja < minSeedCost)
-    minSeedCost = crop.seeds.joja;
-  if (crop.seeds.special != 0 && options.seeds.special && crop.seeds.special < minSeedCost)
-    minSeedCost = crop.seeds.special;
-  if (minSeedCost == Infinity)
-    minSeedCost = 0;
-
-  return minSeedCost;
-}
-
-/*
- * Calculates the number of crops planted.
- * @param crop The crop object, containing all the crop data.
- * @return The number of crops planted, taking the desired number planted and the max seed money into account.
- */
-const planted = (crop: Crop) => {
-  if (options.buySeed && options.maxSeedMoney !== 0) {
-    return Math.min(
-      options.planted,
-      Math.floor(options.maxSeedMoney / minSeedCost(crop))
-    );
-  } else {
-    return options.planted;
-  }
-};
-
-
-const HomeScreen = () => {
-  const [selectedCrop, setSelectedCrop] = useState("carrot");
-  const [selectedSeason, setSelectedSeason] = useState("spring");
-  const [currentDay, setCurrentDay] = useState(1);
-  const [numberDays, setNumberDays] = useState(28);
-  const [numberOfCrops, setNumberOfCrops] = useState(1);
-  const [isCrossSeason, setIsCrossSeason] = useState(false);
-  const [profit, setProfit] = useState(0);
-  const [profitData, setProfitData] = useState({});
-  const [settings, setSettings] = useState(options);
-  const [useLevel, setUseLevel] = useState<number>(0);
-  const [renderKey, setRenderKey] = useState(0);
-
-  const [levelRatio, setLevelRatio] = useState({
-    ratioN: 0,
-    ratioS: 0,
-    ratioG: 0,
-    ratioI: 0
-  });
-  const [cropsList, setCropsList] = useState([{
-    label:
-      "Carrot",
-    value: "carrot",
-  }]);
-  /*
+    /*
  * Calculates the profit for a specified crop.
  * @param crop The crop object, containing all the crop data.
  * @return The total profit.
@@ -329,61 +403,42 @@ const HomeScreen = () => {
     // console.log("Profit: " + profit);
     return resultProfitData;
   };
-  useEffect(() => {
-    const mapCropList = Object.keys(crops).map((cropKey, i) => {
-      return {
-        label: cropKey,
-        value: cropKey,
-      }
-    })
-    setCropsList(mapCropList);
-    setRenderKey(prevKey => prevKey + 1);
-  }, []);
+/*
+* Calculates the minimum cost of a single packet of seeds.
+* @param crop The crop object, containing all the crop data.
+* @return The minimum cost of a packet of seeds, taking options into account.
+*/
+function minSeedCost(crop: Crop) {
+  var minSeedCost = Infinity;
 
-  console.log("cropsList", cropsList)
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
-      headerImage={
-        <Image
-          source={require("@/assets/images/background.jpg")}
-          style={styles.reactLogo}
-        />
-      }
-    >
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Stardew Valley Copilot!</ThemedText>
-        <Carrot />
-      </ThemedView>
-      <Select key={renderKey} options={cropsList} theme={"dark"} styles={styles} />
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">{crops[selectedCrop].name}</ThemedText>
-        <ThemedText>Total Profit: {profit} </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Crop Info </ThemedText>
-        <ThemedText>
-          Value (Normal): {crops[selectedCrop].produce.price}{" "}
-        </ThemedText>
-        <ThemedText>
-          Seeds (Pierre): {crops[selectedCrop].seeds.pierre}
-        </ThemedText>
-        <ThemedText>Seeds (Joja): {crops[selectedCrop].seeds.joja}</ThemedText>
-      </ThemedView>
-      <ThemedButton text="Calcular" />
-    </ParallaxScrollView>
+  if (crop.seeds.pierre != 0 && options.seeds.pierre && crop.seeds.pierre < minSeedCost)
+    minSeedCost = crop.seeds.pierre;
+  if (crop.seeds.joja != 0 && options.seeds.joja && crop.seeds.joja < minSeedCost)
+    minSeedCost = crop.seeds.joja;
+  if (crop.seeds.special != 0 && options.seeds.special && crop.seeds.special < minSeedCost)
+    minSeedCost = crop.seeds.special;
+  if (minSeedCost == Infinity)
+    minSeedCost = 0;
 
-  );
+  return minSeedCost;
 }
 
-const App = () => {
-  return (
-    <SelectProvider>
-      <HomeScreen />
-    </SelectProvider>
-  );
+/*
+ * Calculates the number of crops planted.
+ * @param crop The crop object, containing all the crop data.
+ * @return The number of crops planted, taking the desired number planted and the max seed money into account.
+ */
+const planted = (crop: Crop) => {
+  if (options.buySeed && options.maxSeedMoney !== 0) {
+    return Math.min(
+      options.planted,
+      Math.floor(options.maxSeedMoney / minSeedCost(crop))
+    );
+  } else {
+    return options.planted;
+  }
 };
-export default App;
+
 const styles = StyleSheet.create({
   optionsList: {
     height: 300,//OPTIONS_LIST_HEIGHT modificar este valor en la libreria node_modules\@mobile-reality\react-native-select-pro\src\constants\styles.ts
